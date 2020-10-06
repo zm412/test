@@ -18,10 +18,10 @@ class Block3 extends React.Component{
     return(
     <Grid container spacing={4}>
         <Grid item xs={7}>
-            Имя Фамилия Отчество
+      {this.props.fullName}
         </Grid>
         <Grid item xs={2}>
-            <Button href="#text-buttons" color="primary"> Link </Button>
+            <Button href="#text-buttons" onClick={this.props.forClick} color="primary">{this.props.buttonsName}</Button>
         </Grid>
    </Grid>
     )

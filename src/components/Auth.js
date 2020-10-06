@@ -1,7 +1,7 @@
 let React = require('react');
 let InpText = require('./parts/inpText');
 let ButtSubmit = require('./parts/buttSubmit');
-let FormBlock = require('./parts/formBlock');
+//let FormBlock = require('./formBlock');
 
 class Auth extends React.Component{
   constructor(){
@@ -100,10 +100,8 @@ class Auth extends React.Component{
     let nameForm, funcLoginButt, funcRegisterButt, namesOfEl;
     
 
-        if(this.state.regimLogin){
+        if(!this.state.regimRedact){
 
-          nameForm = 'Login';
-          funcLoginButt = this.functionForLogin;
           funcRegisterButt = this.changeRegim;
           namesOfEl = [
             ['Login', 'login', this.state.login, 'text',  this.state.loginStyle], 

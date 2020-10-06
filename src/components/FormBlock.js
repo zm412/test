@@ -1,10 +1,11 @@
 
 let React = require('react');
-let ButtSubmit = require('./buttSubmit');
+//let ButtSubmit = require('./buttSubmit');
 import TextField from '@material-ui/core/TextField';
 import { borders } from '@material-ui/system';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import CreateGrid from './CreateGrid';
 
 
 class FormBlock extends React.Component{
@@ -28,31 +29,26 @@ class FormBlock extends React.Component{
 //      <TextField key={index} inputProps={inputProps} label={item[1]} onFocus={outInfo[6] ? outInfo[7]: ()=>{}} cleanFocus={outInfo[6]} funcFocus={outInfo[7]} /> )
 //    );
 //
-    let outInfo = this.props.formInformation;
-    let listButts = <div>
-            <ButtSubmit nameOfButton={'login'}  func={outInfo[1]} inviting={outInfo[3] ? false : true} />
-            <ButtSubmit nameOfButton={'register'} func={outInfo[2]} inviting={outInfo[3] ? true : false}/>
-                    </div>
+ //   let outInfo = this.props.formInformation;
+ //   let listButts = <div>
+ //           <ButtSubmit nameOfButton={'login'}  func={outInfo[1]} inviting={outInfo[3] ? false : true} />
+ //           <ButtSubmit nameOfButton={'register'} func={outInfo[2]} inviting={outInfo[3] ? true : false}/>
+ //                   </div>
     
+    let inputProps = this.props.collection; 
+    let list = this.props.collection.idArr.map((item, index) => 
+      <CreateGrid idEl={item} key={index} inputProps={inputProps} />
+)
     return(
       <form action="" method="post">
+        
 
 
     <Grid container spacing={4}>
-        <Grid item xs={12} sm={3}>
-          <TextField label="Name" id="name" defaultValue="name" variant="outlined" />
-        </Grid>
+      {console.log(list)}
+      {list}
 
-        <Grid item xs={12} sm={3}>
-          <TextField label="Email" id="email" defaultValue="email" variant="outlined" />
-        </Grid>
-
-        <Grid item xs={12} sm={3}>
-          <TextField label="Phone number" id="phone" defaultValue="phone" variant="outlined" />
-        </Grid>
-    </Grid>
-      <div>
-               </div>
+      </Grid>
       </form>
     )
   }
