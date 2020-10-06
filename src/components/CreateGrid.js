@@ -21,15 +21,15 @@ class CreateGrid extends React.Component{
     let meaning = data[currentId].meaning;
 
     if(regimRedact){
-      
      return <Grid item xs={12} sm={3}>
-          <TextField label={label} id={currentId} defaultValue={meaning} variant="outlined" />
+          <TextField label={label} id={currentId} defaultValue={meaning} variant="outlined" disabled={currentId == "email" ? true : false} onChange={funcForOnChange} />
         </Grid>
+        
       
     }else{
         return <Grid item xs={12}>,
-      <p> {meaning} </p>,
-      </Grid>
+                  <p> {meaning} </p>,
+              </Grid>
     }
   }
 }

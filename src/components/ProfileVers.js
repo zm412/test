@@ -2,6 +2,7 @@ let React = require('react');
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link'
 import Block3 from './Block3';
+import Block1 from './Block1';
 import FormBlock from './FormBlock';
 
 
@@ -15,6 +16,8 @@ class ProfileVers extends React.Component{
       phoneNumber: '+94654316354321',
       buttonsName: 'Редактировать',
       regimRedact: false,
+      cleanFocusName: false,
+      cleanFocusPhone: false
     }
 
     this.funcOnChange = this.funcOnChange.bind(this);
@@ -34,6 +37,12 @@ class ProfileVers extends React.Component{
     });
   }
   
+  clearFocus(e){
+    e.preventDefault();
+    e.target.value = '';
+  }
+
+
 
   funcOnChange(e){
     e.preventDefault();
@@ -76,17 +85,11 @@ class ProfileVers extends React.Component{
     let propsForForm = {data: data,  idArr: idArr, funcForOnChange: this.funcOnChange, regimRedact: this.state.regimRedact};
     
     return(
-      <div>     
-  
-    <Grid container spacing={4}>
-      <Grid item xs={12}> <Block3 fullName={this.state.Name} forClick={this.clickForRedactProfile} buttonsName={this.state.buttonsName} /></Grid>
-    </Grid>   
-
-    <Grid container spacing={4}>
-      {console.log(this.state.regimRedact)}
-        <Grid item xs={12}> <FormBlock  collection={propsForForm}/> </Grid>
-    </Grid>
-      </div>
+    <div>     
+      <Block1  chapter= {data.email.meaning} />
+      <Block3 fullName={this.state.name} forClick={this.clickForRedactProfile} buttonsName={this.state.buttonsName}  />
+       <FormBlock  collection={propsForForm}/>
+    </div>
    )
   }
 }

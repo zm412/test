@@ -17,16 +17,7 @@ class Header extends React.Component{
     
     return( <div>
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-      <Grid container spacing={4}>
-        <Grid item xs={8}>
-          Picture
-        </Grid>
-
-        <Grid item xs={2}>
-            <Button href="#text-buttons" color="primary"> Войти </Button>
-        </Grid>
-   </Grid>
-      </div>
+     </div>
     )
   }
 }

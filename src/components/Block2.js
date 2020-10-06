@@ -21,6 +21,7 @@ class Block2 extends React.Component{
       <div>
     <Grid container spacing={4}>
         <Grid item xs={4}> ЛИЧНЫЙ ПРОФИЛЬ </Grid>
+        <Grid item xs={7}></Grid>
     </Grid>
       
     <Grid container spacing={4}>
