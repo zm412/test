@@ -53,7 +53,7 @@ const DialogActions = withStyles((theme) => ({
 
 
 
-export default function ButtonSave() {
+export default function ButtonSave({needsUpdate}) {
   const [open, setOpen] = React.useState(false);
   const [openSecond, setOpenSecond] = React.useState(false);
 
@@ -61,6 +61,7 @@ export default function ButtonSave() {
     setOpen(true);
   };
   const handleClose = () => {
+    needsUpdate();
     setOpen(false);
     setOpenSecond(true)
   };
@@ -115,3 +116,4 @@ export default function ButtonSave() {
     </div>
   )
 }
+

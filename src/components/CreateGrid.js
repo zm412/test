@@ -22,11 +22,12 @@ class CreateGrid extends React.Component{
     let defineProfile;
     let label = data[currentId].label;
     let meaning = data[currentId].meaning;
+    let err = data[currentId].isError;
 
     if(regimRedact){
       
      return <Grid item xs={12} sm={3}>
-          <TextField label={label} id={currentId} error={data[currentId].isError} helperText="" defaultValue={meaning} variant="outlined" disabled={currentId == "email" ? true : false} onChange={this.props.funcOnChange} />
+          <TextField label={label} id={currentId} error={err} helperText="" defaultValue={meaning} variant="outlined" disabled={currentId == "email" ? true : false} onChange={this.props.funcOnChange} />
         </Grid>
         
       

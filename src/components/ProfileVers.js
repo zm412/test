@@ -19,7 +19,6 @@ class ProfileVers extends React.Component{
 
     }
 
-    this.funcOnChange = this.funcOnChange.bind(this);
     this.clickForRedactProfile = this.clickForRedactProfile.bind(this);
 
   }
@@ -48,21 +47,8 @@ class ProfileVers extends React.Component{
       this.setState({name: nameValue,
                     email: emailValue,
                     phoneNumber: phoneValue})
+    console.log(this.state.name, this.state.email, this.state.phoneNumber)
     } 
-  }
-
-  funcOnChange(e){
-    e.preventDefault();
-    let key = e.target.id;
-    let value = e.target.value;
-    let validation = this.checkFieldValidation(key)
-    if(!validation){
-      e.target.error = true;
-      e.target.helperText = "Неверно указаны данные в поле " + e.target.label;
-    }
-    this.setState((state) => {
-      return {[key] : value}
-    })
   }
  
   changeRegim(e){
@@ -123,7 +109,7 @@ checkFieldsPhone(str){
       {console.log(this.state.name, this.state.email, this.state.phoneNumber)}
       <Block1  chapter= {data.email.meaning} />
       <Block3 fullName={this.state.name} forClick={this.clickForRedactProfile} buttonsName={this.state.buttonsName}  />
-       <FormBlock  collection={propsForForm} buttonSaveFunc={this.saveButton.bind(this)}/>
+       <FormBlock  collection={propsForForm} saveButton={this.saveButton.bind(this)}/>
       {console.log(this.state.name, this.state.email, this.state.phoneNumber)}
     </div>
    )
