@@ -16,8 +16,7 @@ class ProfileVers extends React.Component{
       phoneNumber: '+94654316354321',
       buttonsName: 'Редактировать',
       regimRedact: false,
-      cleanFocusName: false,
-      cleanFocusPhone: false
+
     }
 
     this.funcOnChange = this.funcOnChange.bind(this);
@@ -43,11 +42,24 @@ class ProfileVers extends React.Component{
   }
 
 
+  saveButton(nameValue, emailValue, phoneValue){
+    return function(e){
+      e.preventDefault();
+      this.setState({name: nameValue,
+                    email: emailValue,
+                    phoneNumber: phoneValue})
+    } 
+  }
 
   funcOnChange(e){
     e.preventDefault();
     let key = e.target.id;
     let value = e.target.value;
+    let validation = this.checkFieldValidation(key)
+    if(!validation){
+      e.target.error = true;
+      e.target.helperText = "Неверно указаны данные в поле " + e.target.label;
+    }
     this.setState((state) => {
       return {[key] : value}
     })
@@ -58,6 +70,25 @@ class ProfileVers extends React.Component{
     this.setState({regimRedact: !this.state.regimRedact});
   }
 
+  checkFieldValidation(key){
+    let nameExp = /^[A-ЯЁ][а-яё]+\s[A-ЯЁ][а-яё]+$/;
+    let phoneExp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+    let str = this.state[key];
+
+    if(!nameExp.test(str) || !phoneExpt.test(str)){
+      console.log('false');
+      return false;
+    }else{
+      console.log('true');
+      return true;
+    }
+  }
+
+checkFieldsPhone(str){
+    let phone = this.state.phoneNumber;
+    let nameExp = /^[A-ЯЁ][а-яё]+\s[A-ЯЁ][а-яё]+$/;
+    return nameExp.test(name);
+  }
  
   
   render(){
@@ -71,24 +102,29 @@ class ProfileVers extends React.Component{
       name: {
         meaning: this.state.name,
         label: "Имя и фамилия",
+        isError: () => {this.chekFieldValidation('name')}
       },
       email: {
         meaning: this.state.email,
-        label: "Email"
+        label: "Email",
+        isError: false
       },
       phoneNumber:{
         meaning: this.state.phoneNumber,
-        label: "Номер телефона"
+        label: "Номер телефона",
+        isError: () => {this.chekFieldValidation('phoneNumber')}
       }
       }
 
-    let propsForForm = {data: data,  idArr: idArr, funcForOnChange: this.funcOnChange, regimRedact: this.state.regimRedact};
+    let propsForForm = {data: data,  idArr: idArr, regimRedact: this.state.regimRedact};
     
     return(
     <div>     
+      {console.log(this.state.name, this.state.email, this.state.phoneNumber)}
       <Block1  chapter= {data.email.meaning} />
       <Block3 fullName={this.state.name} forClick={this.clickForRedactProfile} buttonsName={this.state.buttonsName}  />
-       <FormBlock  collection={propsForForm}/>
+       <FormBlock  collection={propsForForm} buttonSaveFunc={this.saveButton.bind(this)}/>
+      {console.log(this.state.name, this.state.email, this.state.phoneNumber)}
     </div>
    )
   }
