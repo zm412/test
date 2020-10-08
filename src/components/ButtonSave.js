@@ -58,8 +58,6 @@ export default function ButtonSave({closeRedact, currentValue, funcSendInfo, dat
   const [openSecond, setOpenSecond] = React.useState(false);
   const [openErr, setOpenErr] = React.useState(false);
 
-
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -67,14 +65,12 @@ export default function ButtonSave({closeRedact, currentValue, funcSendInfo, dat
   const handleClose = () => {
     setOpen(false);
     setOpenSecond(true);
-    console.log(currentValue())
-    console.log(dataObj)
-      currentValue();
-    if(!dataObj.name.isError && !dataObj.email.isError && !dataObj.phoneNumber.isError){
-      funcSendInfo();
-    }else{
-      setOpenErr(true);
-    }
+      if(!dataObj.name.isError && !dataObj.email.isError && !dataObj.phoneNumber.isError){
+        currentValue();
+        funcSendInfo();
+      }else{
+        setOpenErr(true);
+      }
   };
 
   const handleCloseSecond = () => {

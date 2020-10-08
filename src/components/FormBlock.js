@@ -1,6 +1,5 @@
 
 let React = require('react');
-//let ButtSubmit = require('./buttSubmit');
 import TextField from '@material-ui/core/TextField';
 import { borders } from '@material-ui/system';
 import Grid from '@material-ui/core/Grid';

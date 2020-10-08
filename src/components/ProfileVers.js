@@ -2,6 +2,7 @@ let React = require('react');
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link'
 import Block3 from './Block3';
+import Block2 from './Block2';
 import Block1 from './Block1';
 import FormBlock from './FormBlock';
 import axios from 'axios';
@@ -14,7 +15,7 @@ class ProfileVers extends React.Component{
     this.state = {
       name:'Сидорова Наталья Ивановна',
       email: 'sydorova@mail.ru',
-      phoneNumber: '++7 989 090 78 90',
+      phoneNumber: '+7 989 090 78 90',
       nameTemp:'Сидорова Наталья Ивановна',
       emailTemp: 'sydorova@mail.ru',
       phoneNumberTemp: '+7 989 090 78 90',
@@ -92,7 +93,6 @@ class ProfileVers extends React.Component{
           .then(json => localStorage.setItem('store', JSON.stringify(json)))
 
     let answ = JSON.parse(localStorage.getItem('store'));
-    console.log(answ);
   
   }
 
@@ -111,7 +111,6 @@ class ProfileVers extends React.Component{
     let str = this.state[checkKey];
     let validErr = key + 'ValidErr';
 
-    console.log(str)
     if(!nameExp.test(str) && !phoneExp.test(str) && !emailExp.test(str)){
       this.setState({[validErr]: true});
     }else{
@@ -153,6 +152,8 @@ class ProfileVers extends React.Component{
     
     return(
     <div>     
+      
+      <Block2 />
       <Block1  chapter= {data.email.meaning} />
       <Block3 fullName={this.state.name} forClick={this.clickForRedactProfile} buttonsName={this.state.regimRedact ? 'Закрыть Х': 'Редактировать'}  />
        <FormBlock  collection={propsForForm} />

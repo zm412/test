@@ -1,8 +1,8 @@
 
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 let React = require('react');
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link'
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 
 
 class Block2 extends React.Component{
@@ -10,11 +10,7 @@ class Block2 extends React.Component{
   constructor(props){
     super(props);
   }
-  
-  handleClick(){
-
-  }
-  
+ 
   render(){
     
     return(
@@ -30,13 +26,8 @@ class Block2 extends React.Component{
                 <Link color="inherit" href="/" onClick={this.handleClick}>
                   Главная
                 </Link>
-                <Link
-                  color="textPrimary"
-                  href="/profile"
-                  onClick={this.handleClick}
-                  aria-current="page"
-                >
-                 Личный профиль 
+                <Link color="inherit" href="/profile" onClick={this.handleClick}>
+                  Личный профиль
                 </Link>
               </Breadcrumbs>
         </Grid>

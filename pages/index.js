@@ -8,6 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import AuthInfo from '../src/components/Auth';
 import Button from '@material-ui/core/Button';
 import Router from 'next/router';
+import Link from 'next/link'
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 
 
 
@@ -18,8 +20,22 @@ export default function Home(){
 
   return <div>
     <Header />
+    <Grid container spacing={4}>
+        <Grid item xs={4}>ГЛАВНАЯ</Grid>
+        <Grid item xs={7}></Grid>
+    </Grid>
       <Block1  chapter="Личный профиль" />
-      <Block2 />
+ 
+    <Grid container spacing={4}>
+        <Grid item xs={6}>
+              <Breadcrumbs aria-label="breadcrumb">
+                <Link color="inherit" href="/" >
+                  Главная
+                </Link>
+              </Breadcrumbs>
+        </Grid>
+   </Grid>
+
 
     </div>
 }
