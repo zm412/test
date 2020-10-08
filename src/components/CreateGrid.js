@@ -24,11 +24,12 @@ class CreateGrid extends React.Component{
     let meaning = data[currentId].meaning;
     let temp = data[currentId].temp;
     let err = data[currentId].isError;
+    let messageErr = data[currentId].messageErr;
 
     if(regimRedact){
       
      return <Grid item xs={12} sm={3}>
-          <TextField label={label} id={currentId} error={err} helperText="" defaultValue={temp} variant="outlined" disabled={currentId == "email" ? true : false} onChange={funcOnChange} />
+          <TextField label={label} id={currentId} error={err} helperText={err ? messageErr : '' } defaultValue={temp} variant="outlined" disabled={currentId == "email" ? true : false} onChange={funcOnChange} />
         </Grid>
         
       

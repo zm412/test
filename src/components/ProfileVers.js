@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Block3 from './Block3';
 import Block1 from './Block1';
 import FormBlock from './FormBlock';
+import axios from 'axios';
 
 
 class ProfileVers extends React.Component{
@@ -13,19 +14,21 @@ class ProfileVers extends React.Component{
     this.state = {
       name:'Сидорова Наталья Ивановна',
       email: 'sydorova@mail.ru',
-      phoneNumber: '+94654316354321',
-      currentValue: ['Сидорова Наталья Ивановна', 'sydorova@mail.ru', '+94654316354321'],
+      phoneNumber: '++7 989 090 78 90',
       nameTemp:'Сидорова Наталья Ивановна',
       emailTemp: 'sydorova@mail.ru',
-      phoneNumberTemp: '+94654316354321',
+      phoneNumberTemp: '+7 989 090 78 90',
       regimRedact: false,
-
+      nameValidErr:false, 
+      phoneNumberValidErr: false 
     }
     
     this.clickForRedactProfile = this.clickForRedactProfile.bind(this);
+    this.checkFieldValidation = this.checkFieldValidation.bind(this);
     this.changeRegim = this.changeRegim.bind(this);
     this.funcOnChange = this.funcOnChange.bind(this);
     this.currentValue = this.currentValue.bind(this);
+    this.funcSendInfo = this.funcSendInfo.bind(this);
   }
 
   currentValue(){
@@ -36,21 +39,13 @@ class ProfileVers extends React.Component{
     })
     
   }
-   
-  componentDidMount() {
-    if(this.state.setCurrentValue){
-      this.setState({
-        name: this.state.currentValue[0],
-        email: this.state.currentValue[1],
-        phoneNumber: this.state.currentValue[2],
-      });
-    }
-}
-
+  
   funcOnChange(e){
     e.preventDefault();
     let key = e.target.id + 'Temp';
+    
     let value = e.target.value;
+    this.checkFieldValidation(e.target.id);
     this.setState((state) => {
       return {[key] : value}
     })
@@ -108,25 +103,19 @@ class ProfileVers extends React.Component{
   }
 
   checkFieldValidation(key){
-    let nameExp = /^[A-ЯЁ][а-яё]+\s[A-ЯЁ][а-яё]+$/;
+    let nameExp = /^[A-ЯЁ][а-яё]+\s[A-ЯЁ][а-яё]+\s[A-ЯЁ][а-яё]+$/;
     let phoneExp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
-    let str = this.state[key];
+   let checkKey = key+'Temp';
+    let str = this.state[checkKey];
+    let validErr = key + 'ValidErr'
 
-    if(!nameExp.test(str) || !phoneExpt.test(str)){
-      console.log('false');
-      return false;
+    console.log(str)
+    if(!nameExp.test(str) && !phoneExp.test(str)){
+      this.setState({[validErr]: true});
     }else{
-      console.log('true');
-      return true;
+      this.setState({[validErr]: false});
     }
   }
-
-checkFieldsPhone(str){
-    let phone = this.state.phoneNumber;
-    let nameExp = /^[A-ЯЁ][а-яё]+\s[A-ЯЁ][а-яё]+$/;
-    return nameExp.test(name);
-  }
- 
   
   render(){
     let idArr = ['email', 'phoneNumber'];
@@ -140,7 +129,8 @@ checkFieldsPhone(str){
         meaning: this.state.name,
         temp: this.state.nameTemp,
         label: "Имя и фамилия",
-        isError: () => {this.chekFieldValidation('name')}
+        isError: this.state.nameValidErr,
+        messageErr: 'Вы неверно указали имя'
       },
       email: {
         meaning: this.state.email,
@@ -152,11 +142,12 @@ checkFieldsPhone(str){
         meaning: this.state.phoneNumber,
         temp: this.state.phoneNumberTemp,
         label: "Номер телефона",
-        isError: () => {this.chekFieldValidation('phoneNumber')}
+        isError: this.state.phoneNumberValidErr,
+        messageErr: 'Вы неверно указали номер телефона'
       }
       }
 
-    let propsForForm = {data: data,  idArr: idArr, regimRedact: this.state.regimRedact, changeRegim: this.changeRegim, funcOnChange: this.funcOnChange, currentValue: this.currentValue};
+    let propsForForm = {data: data,  idArr: idArr, regimRedact: this.state.regimRedact, changeRegim: this.changeRegim, funcOnChange: this.funcOnChange, currentValue: this.currentValue, funcSendInfo: this.funcSendInfo};
     
     return(
     <div>     

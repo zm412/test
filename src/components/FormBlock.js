@@ -2,7 +2,6 @@
 let React = require('react');
 //let ButtSubmit = require('./buttSubmit');
 import TextField from '@material-ui/core/TextField';
-import axios from 'axios';
 import { borders } from '@material-ui/system';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -29,7 +28,7 @@ class FormBlock extends React.Component{
     let list = this.props.collection.idArr.map((item, index) => 
       <CreateGrid idEl={item} key={index}  inputProps={inputProps} />
 )
-    let button = inputProps.regimRedact ?  <ButtonSave  closeRedact={inputProps.changeRegim} currentValue={inputProps.currentValue} /> : '';
+    let button = inputProps.regimRedact ?  <ButtonSave  closeRedact={inputProps.changeRegim} currentValue={inputProps.currentValue} funcSendInfo={inputProps.funcSendInfo} /> : '';
     return(
       <form action="" method="post" >
           <Grid container spacing={4}>

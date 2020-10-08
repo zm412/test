@@ -53,7 +53,7 @@ const DialogActions = withStyles((theme) => ({
 
 
 
-export default function ButtonSave({closeRedact, currentValue}) {
+export default function ButtonSave({closeRedact, currentValue, funcSendInfo}) {
   const [open, setOpen] = React.useState(false);
   const [openSecond, setOpenSecond] = React.useState(false);
 
@@ -62,12 +62,13 @@ export default function ButtonSave({closeRedact, currentValue}) {
   };
   const handleClose = () => {
     setOpen(false);
-    setOpenSecond(true)
-    console.log(currentValue)
+    setOpenSecond(true);
     currentValue();
+    funcSendInfo();
   };
   const handleCloseSecond = () => {
     setOpenSecond(false);
+    console.log(document.cookie)
   }
 
   return (
