@@ -53,7 +53,7 @@ const DialogActions = withStyles((theme) => ({
 
 
 
-export default function ButtonSave({needsUpdate}) {
+export default function ButtonSave({closeRedact, currentValue}) {
   const [open, setOpen] = React.useState(false);
   const [openSecond, setOpenSecond] = React.useState(false);
 
@@ -61,12 +61,13 @@ export default function ButtonSave({needsUpdate}) {
     setOpen(true);
   };
   const handleClose = () => {
-    needsUpdate();
     setOpen(false);
     setOpenSecond(true)
+    console.log(currentValue)
+    currentValue();
   };
   const handleCloseSecond = () => {
-    setOpenSecond(false)
+    setOpenSecond(false);
   }
 
   return (
@@ -89,7 +90,7 @@ export default function ButtonSave({needsUpdate}) {
           <Button autoFocus variant="contained" color="primary" onClick={handleClose} color="primary">
             Save changes
           </Button>
-          <Button autoFocus variant="contained" color="primary" onClick={()=>{alert('Hello')}} color="primary">
+          <Button autoFocus variant="contained" color="primary" onClick={closeRedact} color="primary">
     Cancel
           </Button>
         </DialogActions>
