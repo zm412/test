@@ -105,12 +105,14 @@ class ProfileVers extends React.Component{
   checkFieldValidation(key){
     let nameExp = /^[A-ЯЁ][а-яё]+\s[A-ЯЁ][а-яё]+\s[A-ЯЁ][а-яё]+$/;
     let phoneExp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+    let emailExp = /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u;
+
    let checkKey = key+'Temp';
     let str = this.state[checkKey];
-    let validErr = key + 'ValidErr'
+    let validErr = key + 'ValidErr';
 
     console.log(str)
-    if(!nameExp.test(str) && !phoneExp.test(str)){
+    if(!nameExp.test(str) && !phoneExp.test(str) && !emailExp.test(str)){
       this.setState({[validErr]: true});
     }else{
       this.setState({[validErr]: false});
@@ -151,12 +153,9 @@ class ProfileVers extends React.Component{
     
     return(
     <div>     
-      {console.log(this.state.name, this.state.email, this.state.phoneNumber)}
       <Block1  chapter= {data.email.meaning} />
       <Block3 fullName={this.state.name} forClick={this.clickForRedactProfile} buttonsName={this.state.regimRedact ? 'Закрыть Х': 'Редактировать'}  />
        <FormBlock  collection={propsForForm} />
-      {console.log(this.state.name, this.state.email, this.state.phoneNumber)}
-      {console.log(this.state.nameTemp, this.state.emailTemp, this.state.phoneNumberTemp)}
     </div>
    )
   }

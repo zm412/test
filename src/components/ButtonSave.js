@@ -53,23 +53,40 @@ const DialogActions = withStyles((theme) => ({
 
 
 
-export default function ButtonSave({closeRedact, currentValue, funcSendInfo}) {
+export default function ButtonSave({closeRedact, currentValue, funcSendInfo, dataObj}) {
   const [open, setOpen] = React.useState(false);
   const [openSecond, setOpenSecond] = React.useState(false);
+  const [openErr, setOpenErr] = React.useState(false);
+
+
 
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
     setOpenSecond(true);
-    currentValue();
-    funcSendInfo();
+    console.log(currentValue())
+    console.log(dataObj)
+      currentValue();
+    if(!dataObj.name.isError && !dataObj.email.isError && !dataObj.phoneNumber.isError){
+      funcSendInfo();
+    }else{
+      setOpenErr(true);
+    }
   };
+
   const handleCloseSecond = () => {
     setOpenSecond(false);
-    console.log(document.cookie)
   }
+
+  const handleCloseErr = () => {
+    setOpenErr(false);
+    setOpenSecond(false);
+  }
+
+
 
   return (
     <div>
@@ -113,6 +130,24 @@ export default function ButtonSave({closeRedact, currentValue, funcSendInfo}) {
         </DialogActions>
       </Dialog>
     </>
+    
+<>
+      <Dialog onClose={handleCloseErr} aria-labelledby="customized-dialog-title" open={openErr}>
+        <DialogTitle id="customized-dialog-title" onClose={handleCloseSecond}>
+            Ошибка!!!
+                  </DialogTitle>
+          <Typography gutterBottom>
+   Неверно введены данные. Изменения не сохранены 
+        </Typography>
+    
+        <DialogActions>
+          <Button autoFocus variant="contained" color="primary" onClick={handleCloseErr} color="primary">
+              Вернуться к редактированию 
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+
 
 
     </div>
